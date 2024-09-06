@@ -15,43 +15,65 @@ import Response from './response.jsx';
 
 function App() {
   const [showResponse, setShowResponse] = useState(false);
+  const [responseQuery, setresponseQuery] = useState([{}])
 
-  function clear() {
+
+  function changeCss(){
     let text = document.getElementsByClassName('txt');
     for (let i = 0; i < text.length; i++) {
       text[i].innerHTML = '';
     }
     let pic = document.getElementsByClassName('logo');
-    if (pic.length > 0) pic[0].src = '';
+    if (pic.length > 0) {
+        pic[0].style.position = 'absolute'; 
+        pic[0].style.top = '0';   
+        pic[0].style.left = '160px';   
+        pic[0].style.width = '100px';
+    }
+    const inputGrp = document.querySelector('.input-grp');
+if (inputGrp) {
+  inputGrp.style.position = 'fixed';
+  inputGrp.style.bottom = '50px'; // 50px padding from the bottom
+  inputGrp.style.left = '100px'; // 100px padding from the left edge
+  inputGrp.style.right = '100px'; // 100px padding from the right edge
+  inputGrp.style.padding = '0'; // No additional padding inside the input-grp
+  inputGrp.style.backgroundColor = '#DCDFCE'; // Optional background color
+  inputGrp.style.border = 'none'; // Remove the border
+  inputGrp.style.boxShadow = 'none'; // Remove the shadow
+  inputGrp.style.maxWidth = 'calc(100% - 200px)';
 
-    let optionElements = document.getElementsByClassName('options');
+    
+}
+
+
+  let optionElements = document.getElementsByClassName('options');
     for (let i = 0; i < optionElements.length; i++) {
       optionElements[i].style.display = 'none';
     }
+}
 
-    const inputGrp = document.querySelector('.input-grp');
-    if (inputGrp) {
-      inputGrp.style.position = 'fixed';
-      inputGrp.style.bottom = '50px'; // 50px padding from the bottom
-      inputGrp.style.left = '100px'; // 100px padding from the left edge
-      inputGrp.style.right = '100px'; // 100px padding from the right edge
-      inputGrp.style.padding = '0'; // No additional padding inside the input-grp
-      inputGrp.style.backgroundColor = '#DCDFCE'; // Optional background color
-      inputGrp.style.border = 'none'; // Remove the border
-      inputGrp.style.boxShadow = 'none'; // Remove the shadow
-      inputGrp.style.maxWidth = 'calc(100% - 200px)';
-    }
+
+  
+  function clear() {
 
     // Set the state to show the Response component
+    let elements = document.getElementsByClassName('input');
+    if (elements.length > 0) {
+      let inputElement = elements[0]; 
+      let text=inputElement.value
+    setresponseQuery(responseQuery.concat({query:text,response:"test response"}))
     setShowResponse(true);
+
   }
+}
 
   function autofill(text) {
     let elements = document.getElementsByClassName('input');
     if (elements.length > 0) {
       let inputElement = elements[0]; // Assuming there is only one element with this class
       inputElement.value = text; // Set the value of the first element
-      clear();
+      changeCss();
+      clear()
     }
   }
 
@@ -66,7 +88,7 @@ function App() {
           <Col><Headd /></Col>
           <Col className='drop'><Language /></Col>
         </Row>
-        {showResponse && <Response query={text1} />}
+        {showResponse && <Response responseQuery={responseQuery} />}
         <Row className='name_logo'>
           <Col>
             <div><img src={logo} className='logo' /></div>
@@ -79,7 +101,7 @@ function App() {
       </Container>
       <Container>
         <Row>
-          <Input className='input-grp' id="inp" clear={clear} />
+          <Input className='input-grp' id="inp" clear={clear} changeCss={changeCss} />
         </Row>
         <Row>
           <Col><Option1 autofill={autofill} text={text1} /></Col>
@@ -90,6 +112,7 @@ function App() {
     </React.StrictMode>
   );
 }
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);

@@ -36,8 +36,9 @@ body {
   text-align: right !important;
 }
 .logo{
-  width: 200px !important;
-  margin-left: 75% !important;
+  position: absolute !important;
+  width: 200px;
+  margin-left: 35% !important;
 }
 .name_logo{
   margin-top: 200px !important;
