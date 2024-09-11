@@ -12,6 +12,7 @@ import logo from './logo.png';
 import Input from './Input.js';
 import Option1 from './Option1.js';
 import Response from './response.jsx';
+import Background from './background.jpg';
 
 function App() {
   const [showResponse, setShowResponse] = useState(false);
@@ -33,16 +34,16 @@ function App() {
     const inputGrp = document.querySelector('.input-grp');
 if (inputGrp) {
   inputGrp.style.position = 'fixed';
-  inputGrp.style.bottom = '50px'; // 50px padding from the bottom
-  inputGrp.style.left = '100px'; // 100px padding from the left edge
-  inputGrp.style.right = '100px'; // 100px padding from the right edge
-  inputGrp.style.padding = '0'; // No additional padding inside the input-grp
-  inputGrp.style.backgroundColor = '#DCDFCE'; // Optional background color
-  inputGrp.style.border = 'none'; // Remove the border
-  inputGrp.style.boxShadow = 'none'; // Remove the shadow
-  inputGrp.style.maxWidth = 'calc(100% - 200px)';
+  inputGrp.style.bottom = '50px'; 
+  inputGrp.style.left = '0';      
+  inputGrp.style.right = '0'; 
+  inputGrp.style.padding = '0 50px'; 
+  
+  inputGrp.style.border = 'none'; 
+  inputGrp.style.boxShadow = 'none'; 
+  inputGrp.style.maxWidth = '100%'; 
+  
 
-    
 }
 
 
@@ -61,7 +62,7 @@ if (inputGrp) {
     if (elements.length > 0) {
       let inputElement = elements[0]; 
       let text=inputElement.value
-    setresponseQuery(responseQuery.concat({query:text,response:"test response"}))
+    setresponseQuery(responseQuery.concat({query:text,response:"Test Response"}))
     setShowResponse(true);
 
   }
@@ -94,8 +95,8 @@ if (inputGrp) {
             <div><img src={logo} className='logo' /></div>
           </Col>
           <Col>
-            <Row className='txt' id="txt1">INFINITE</Row>
-            <Row className='txt' id="txt2">AURA</Row>
+            <Row className='txt' id="txt1">DOJ</Row>
+            <Row className='txt' id="txt2">ChatBot</Row>
           </Col>
         </Row>
       </Container>
