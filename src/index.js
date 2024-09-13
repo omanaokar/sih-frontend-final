@@ -67,17 +67,21 @@ if (inputGrp) {
       let inputElement = elements[0]; 
       text=inputElement.value
       //axios request to node server
-      let answer = await axios({
-        method: 'post',
-        url: 'http://127.0.0.1:3001/hfapi', //url will be changed later when the node server will be hosted
-        headers: {},
-        data: {
-          'prompt' : text,
-        }
-      }).then(res => {
-          response = res.data;
-          console.log(res.data);
-      })  
+      let response;
+  try {
+    response = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:3001/hfapi', // URL will be changed later when the node server will be hosted
+      headers: {},
+      data: {
+        'prompt': text,
+      }
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+  
     setresponseQuery(responseQuery.concat({query:text,response:response}))
     setShowResponse(true);
 
